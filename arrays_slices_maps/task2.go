@@ -7,17 +7,7 @@ import "fmt"
 and returns a new slice containing only the even numbers from the original slice.
 */
 func main() {
-	arr := make([]int, 10)
-	arr[0] = 44
-	arr[1] = 2
-	arr[2] = 4
-	arr[3] = 5
-	arr[4] = 55
-	arr[5] = 66
-	arr[6] = 78
-	arr[7] = 87
-	arr[8] = 90
-	arr[9] = 100
+	arr := []int{55, 1, 33, 34, 4, 5, 6, 77, 88, 100}
 
 	fmt.Printf("Even Numbers: %v", getEvenNumberSlice(arr))
 }

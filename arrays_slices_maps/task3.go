@@ -15,14 +15,8 @@ func main() {
 	fmt.Scan(&studentNumber)
 
 	for i := 0; i < studentNumber; i++ {
-		var name string
-		var age int
-
-		fmt.Printf("[%d] Enter student name:", i+1)
-		fmt.Scan(&name)
-
-		fmt.Printf("[%d] Enter student age: ", i+1)
-		fmt.Scan(&age)
+		name := getName(&i)
+		age := getAge(&i)
 
 		students[name] = age
 	}
@@ -31,4 +25,26 @@ func main() {
 	for name, age := range students {
 		fmt.Printf("%s is %d years old\n", name, age)
 	}
+}
+
+func getName(i *int) string {
+	var name string
+	fmt.Printf("[%d] Enter student name: ", *i+1)
+	fmt.Scan(&name)
+	if (len(name) < 2) || (len(name) > 256) {
+		fmt.Println("Name must be string and its' length must be at least 2 chars and less than 256 chars")
+		return getName(i)
+	}
+	return name
+}
+
+func getAge(i *int) int {
+	var age int
+	fmt.Printf("[%d] Enter student age: ", *i+1)
+	fmt.Scan(&age)
+	if (age <= 16) || (age >= 90) {
+		fmt.Println("Age must be integer which more than 16 and less than 90")
+		return getAge(i)
+	}
+	return age
 }

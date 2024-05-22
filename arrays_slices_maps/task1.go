@@ -9,8 +9,7 @@ fills it with numbers from 1 to 5, and then prints this array in reverse order.
 func main() {
 	arr := [5]int{1, 2, 3, 4, 5}
 
-	for i := len(arr); i > 0; i-- {
-		k := i - 1
-		fmt.Printf("array[%d]: %d\n", k, arr[k])
+	for i := len(arr) - 1; i >= 0; i-- {
+		fmt.Printf("array[%d]: %d\n", i, arr[i])
 	}
 }

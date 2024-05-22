@@ -16,10 +16,10 @@ func main() {
 }
 
 func makeArray(size int) *[]int {
-	arr := new([]int)
+	arr := make([]int, size)
 
 	for i := 0; i < size; i++ {
-		*arr = append(*arr, i+1)
+		arr[i] = i
 	}
-	return arr
+	return &arr
 }

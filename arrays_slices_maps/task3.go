@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 /*
 3. Write a program that uses a map to store information about students (name and age).
@@ -14,11 +17,21 @@ func main() {
 	fmt.Printf("Number of students: ")
 	fmt.Scan(&studentNumber)
 
-	for i := 0; i < studentNumber; i++ {
-		name := getName(&i)
-		age := getAge(&i)
+	i := 0
+	for i < studentNumber {
+		name, err := getName(&i)
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
+		age, err := getAge(&i)
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
 
 		students[name] = age
+		i++
 	}
 
 	fmt.Println("Students:")
@@ -27,24 +40,22 @@ func main() {
 	}
 }
 
-func getName(i *int) string {
+func getName(i *int) (string, error) {
 	var name string
 	fmt.Printf("[%d] Enter student name: ", *i+1)
 	fmt.Scan(&name)
 	if (len(name) < 2) || (len(name) > 256) {
-		fmt.Println("Name must be string and its' length must be at least 2 chars and less than 256 chars")
-		return getName(i)
+		return "", errors.New("Name must be string and its' length must be at least 2 chars and less than 256 chars")
 	}
-	return name
+	return name, nil
 }
 
-func getAge(i *int) int {
+func getAge(i *int) (int, error) {
 	var age int
 	fmt.Printf("[%d] Enter student age: ", *i+1)
 	fmt.Scan(&age)
 	if (age <= 16) || (age >= 90) {
-		fmt.Println("Age must be integer which more than 16 and less than 90")
-		return getAge(i)
+		return 0, errors.New("Age must be integer which more than 16 and less than 90")
 	}
-	return age
+	return age, nil
 }

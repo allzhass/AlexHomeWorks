@@ -21,6 +21,29 @@ func main() {
 	fib2 := new(uint64)
 	*fib2 = 500
 	fmt.Printf("Fibbonachi3 %d equals to %v\n", *fib2, fibbonachi3(fib2))
+
+	fib3 := new(uint64)
+	*fib3 = 500
+	fmt.Printf("Fibbonachi3 %d equals to %v\n", *fib3, fibbonachi4(*fib3))
+}
+
+func fibbonachi4(n uint64) *big.Int {
+	if n == 1 {
+		return big.NewInt(0)
+	} else if n == 2 {
+		return big.NewInt(1)
+	} else {
+		return fibsum(big.NewInt(0), big.NewInt(1), &n)
+	}
+}
+
+func fibsum(f1 *big.Int, f2 *big.Int, n *uint64) *big.Int {
+	if *n > 1 {
+		*n = *n - 1
+		return fibsum(f2, f1.Add(f1, f2), n)
+	} else {
+		return f1
+	}
 }
 
 func fibbonachi3(num *uint64) *big.Int {

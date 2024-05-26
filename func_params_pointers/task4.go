@@ -38,11 +38,11 @@ func fibbonachi4(n uint64) *big.Int {
 }
 
 func fibsum(f1 *big.Int, f2 *big.Int, n *uint64) *big.Int {
-	if *n > 1 {
+	if *n > 2 {
 		*n = *n - 1
 		return fibsum(f2, f1.Add(f1, f2), n)
 	} else {
-		return f1
+		return f2
 	}
 }
 
